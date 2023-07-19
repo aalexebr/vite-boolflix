@@ -37,7 +37,7 @@ export default{
 		}
 	},
 	created(){
-		this.searchMovies()
+		// this.searchMovies()
 	},
 	mounted(){
 

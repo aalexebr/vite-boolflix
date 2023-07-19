@@ -2,6 +2,10 @@
     border: 2px dotted red;
     background-color: bisque;
 }
+@mixin debug-large-two{
+    border: 2px dotted rgb(93, 94, 93);
+    background-color: rgb(196, 255, 219);
+}
 @mixin debug-one{
     border: 1px solid green;
     background-color: lightcoral;

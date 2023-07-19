@@ -12,9 +12,9 @@ export default{
 
 <template>
 <header>
-    <form action="" @click.prevent="$emit('search')">
+    <form action="" @submit.prevent="$emit('search')">
       <input type="text" v-model="store.searchText">
-      <button>
+      <button type="submit">
         search
       </button>
     </form>
