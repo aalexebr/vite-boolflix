@@ -24,11 +24,10 @@ export default{
         lang:{{ element.original_language}}
         vote:{{ element.vote_average}}
         <template v-for="(language,index) in store.langArr" :key="index">
-			<span v-if="element.original_language == store.langArr[index].lang">
-				<div class="lang">
-					<img :src="store.langArr[index].img" alt="">
-				</div>
-			</span>
+			<div class="lang"
+				v-if="element.original_language == store.langArr[index].lang">
+				<img :src="store.langArr[index].img" :alt="store.langArr[index].lang">
+			</div>
 		</template>
       </li>
     </ul>
@@ -43,6 +42,7 @@ main{
     margin-left: 25px;
 	.lang{
 		width: 20px;
+		display: inline-block;
 		img{
 			width: 100%;
 		}

@@ -22,6 +22,7 @@ export default{
     },
 	methods:{
 		searchMovies(){
+			// movie
 			axios.get('https://api.themoviedb.org/3/search/movie',{
 					params:{
 						api_key:'a030de96d73a49e420c677a36c407e57',
@@ -33,7 +34,27 @@ export default{
 					this.store.searchArray=response.data.results
 					console.log(this.store.searchArray)
 					this.store.searchText=''
-				})
+				}
+			)
+			// series
+			axios.get('https://api.themoviedb.org/3/search/tv',{
+					params:{
+						api_key:'a030de96d73a49e420c677a36c407e57',
+						query: this.store.searchText
+						}
+					})
+				.then(response=>{
+					console.log('get',response.data.results)
+					let newArr =[]
+					newArr = response.data.results
+					for(let i=0; i<newArr.length; i++){
+						this.store.searchArray.push(newArr[i])
+					}
+					console.log('storeArr',this.store.searchArray)
+					this.store.searchText=''
+				}
+			)
+
 		},
 		getImgPath: function(imgPath){
 			return new URL(imgPath, import.meta.url).href;

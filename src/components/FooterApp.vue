@@ -4,7 +4,7 @@ import {store} from '../store'
 export default{
     data(){
       return{
-        // store
+        store
       }
     },
     components: {
@@ -15,10 +15,13 @@ export default{
 
 <template>
 <footer>
-    FOOTER
+    FOUND: {{ store.searchArray.length }}
 </footer>
 </template>
 
 <style lang="scss" scoped>
-
+@use '../assets/scss/debugger.scss' as *;
+footer{
+  @include debug-large;
+}
 </style>
