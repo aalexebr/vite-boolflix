@@ -34,6 +34,9 @@ export default{
 					console.log(this.store.searchArray)
 					this.store.searchText=''
 				})
+		},
+		getImgPath: function(imgPath){
+			return new URL(imgPath, import.meta.url).href;
 		}
 	},
 	created(){
