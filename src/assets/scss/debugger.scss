@@ -1,0 +1,12 @@
+@mixin debug-large{
+    border: 2px dotted red;
+    background-color: bisque;
+}
+@mixin debug-one{
+    border: 1px solid green;
+    background-color: lightcoral;
+}
+@mixin debug-two{
+    border: 1px solid rgb(128, 0, 105);
+    background-color: rgb(128, 225, 240);
+}

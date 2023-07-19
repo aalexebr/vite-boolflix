@@ -4,7 +4,7 @@ import {store} from '../store'
 export default{
     data(){
       return{
-        store
+        // store
       }
     },
     components: {
@@ -14,9 +14,9 @@ export default{
 </script>
 
 <template>
-<main>
-    MAIN
-</main>
+<footer>
+    FOOTER
+</footer>
 </template>
 
 <style lang="scss" scoped>

@@ -1,20 +1,29 @@
 <script>
+// store
+import {store} from '../store'
 export default{
     data(){
-      return{}
+      return{
+        store
+      }
     },
-    components: {
-
-    }
 }
 </script>
 
 <template>
 <header>
-    SEARCH
+    <form action="" @click.prevent="$emit('search')">
+      <input type="text" v-model="store.searchText">
+      <button>
+        search
+      </button>
+    </form>
 </header>
 </template>
 
 <style lang="scss" scoped>
-
+@use '../assets/scss/debugger.scss' as *;
+header{
+  @include debug-large;
+}
 </style>
