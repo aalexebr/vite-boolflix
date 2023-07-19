@@ -19,14 +19,14 @@ export default{
 <main>
     <ul>
       <li v-for="(element,i) in store.searchArray" :key="i">
-        title:{{ element.title }}
-        originaltitle:{{ element.original_title }}
+        title:{{ element.title }}{{ element.name }}
+        originaltitle:{{ element.original_title }}{{ element.original_name }}
         lang:{{ element.original_language}}
         vote:{{ element.vote_average}}
         <template v-for="(language,index) in store.langArr" :key="index">
 			<div class="lang"
 				v-if="element.original_language == store.langArr[index].lang">
-				<img :src="store.langArr[index].img" :alt="store.langArr[index].lang">
+				<img :src="getImgPath(`../assets/img/${store.langArr[index].img}`)" :alt="store.langArr[index].lang">
 			</div>
 		</template>
       </li>

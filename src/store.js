@@ -5,15 +5,15 @@ export const store = reactive({
 						langArr:[
 							{
 								lang:'it',
-								img: 'src/assets/img/it.png'
+								img: 'it.png'
 							},
 							{
 								lang:'en',
-								img: 'src/assets/img/uk.png'
+								img: 'uk.png'
 							},
 							{
 								lang:'ja',
-								img: 'src/assets/img/ja.png'
+								img: 'ja.png'
 							},
 						]
                      });
