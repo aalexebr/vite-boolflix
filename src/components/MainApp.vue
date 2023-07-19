@@ -19,14 +19,18 @@ export default{
 <main>
     <ul>
       <li v-for="(element,i) in store.searchArray" :key="i">
+		{{ i }}
+		<div class="poster">
+			<img :src="`https://image.tmdb.org/t/p/w342/${element.poster_path}`" alt="">
+		</div>
         title:{{ element.title }}{{ element.name }}
         originaltitle:{{ element.original_title }}{{ element.original_name }}
         lang:{{ element.original_language}}
         vote:{{ element.vote_average}}
-        <template v-for="(language,index) in store.langArr" :key="index">
+        <template v-for="(language,langIndex) in store.langArr" :key="langIndex">
 			<div class="lang"
-				v-if="element.original_language == store.langArr[index].lang">
-				<img :src="getImgPath(`../assets/img/${store.langArr[index].img}`)" :alt="store.langArr[index].lang">
+				v-if="element.original_language == store.langArr[langIndex].lang">
+				<img :src="getImgPath(`../assets/img/${store.langArr[langIndex].img}`)" :alt="store.langArr[langIndex].lang">
 			</div>
 		</template>
       </li>
@@ -40,6 +44,13 @@ main{
   @include debug-large-two;
   ul{
     margin-left: 25px;
+	.poster{
+		display: inline-block;
+		width: 100px;
+		img{
+			width: 100%;
+		}
+	}
 	.lang{
 		width: 20px;
 		display: inline-block;
