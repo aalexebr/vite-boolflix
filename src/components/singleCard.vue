@@ -33,27 +33,32 @@ export default{
 		<div class="overlay pos-absolute d-none">
 			<ol>	
 			<li>
-				title:{{ elementData.title ?? elementData.name}}
+				title:
+				<h3>
+					{{ elementData.title ?? elementData.name}}
+				</h3>
 			</li>
 			<li>
-				originaltitle:{{ elementData.original_title ?? elementData.original_name}}
+				originaltitle:
+				<h4>
+					{{ elementData.original_title ?? elementData.original_name}}
+				</h4>
 			</li>
-			<li>
+			<!-- <li>
 				lang:{{ elementData.original_language}}
-			</li>
+			</li> -->
 			<li>
-					vote: 
-					<template v-if="Math.round(elementData.vote_average / 2) == 0">
-						<i class="fa-solid fa-star"></i>
-						<i v-for="(e,j) in 4" :key="j" class="fa-regular fa-star"></i>
-					</template>
+				<template v-if="Math.round(elementData.vote_average / 2) == 0">
+					<i class="fa-solid fa-star"></i>
+					<i v-for="(e,j) in 4" :key="j" class="fa-regular fa-star"></i>
+				</template>
 
-					<template v-else>
-						<i v-for="(e,j) in Math.round(elementData.vote_average / 2)" :key="j"
-							class="fa-solid fa-star"></i>
-						<i v-for="(e,j) in (5 - Math.round(elementData.vote_average / 2))" :key="j"
-							class="fa-regular fa-star"></i>
-					</template>
+				<template v-else>
+					<i v-for="(e,j) in Math.round(elementData.vote_average / 2)" :key="j"
+						class="fa-solid fa-star"></i>
+					<i v-for="(e,j) in (5 - Math.round(elementData.vote_average / 2))" :key="j"
+						class="fa-regular fa-star"></i>
+				</template>
 			</li>
 			<li>
 				<!-- <template v-if="store.availableFlags.includes(elementData.original_language)">
@@ -83,8 +88,11 @@ export default{
 .poster{
 		display: inline-block;
 		width: 100%;
+		height: 100%;
 		img{
 			width: 100%;
+			height: 100%;
+			object-fit: cover;
 		}
 
 		&:hover .overlay{
@@ -96,6 +104,12 @@ export default{
 			top: 0;
 			background-color: rgba(0, 0, 0, 0.336);
 			padding: 20px;
+			i{
+				color: yellow;
+			}
+			h3{
+				text-transform: uppercase;
+			}
 		}
 	}
 .lang{

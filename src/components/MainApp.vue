@@ -24,6 +24,11 @@ export default{
 <template>
 <main>
 	<template v-if="store.movieArray.length != 0">
+		<header class="text-center">
+			<h1>
+				movies
+			</h1>
+		</header>
 		<div class="row wrap">
 			<div class="col-25"
 				v-for="(element,i) in store.movieArray" :key="i">
@@ -32,9 +37,11 @@ export default{
 		</div>
 	</template>
 	<template v-if="store.seriesArray.length != 0">
-		<h1>
-			series
-		</h1>
+		<header class="text-center">
+			<h1>
+				series
+			</h1>
+		</header>
 		<div class="row wrap">
 			<div class="col-25"
 				v-for="(element,i) in store.seriesArray" :key="i">
@@ -49,24 +56,15 @@ export default{
 @use '../assets/scss/debugger.scss' as *;
 @use '../assets/scss/utilities.scss' as *;
 main{
-  @include debug-large-two;
+//   @include debug-large-two;
+  background-color: black;
   .col-25{
-	@include debug-one;
+	// @include debug-one;
+	padding: 10px;
   }
-	// .poster{
-	// 	display: inline-block;
-	// 	width: 100px;
-	// 	img{
-	// 		width: 100%;
-	// 	}
-	// }
-	// .lang{
-	// 	width: 20px;
-	// 	display: inline-block;
-	// 	img{
-	// 		width: 100%;
-	// 	}
-	// }
-  
+  header{
+	padding: 10px;
+	color: rgb(186, 186, 186);
+  }
 }
 </style>

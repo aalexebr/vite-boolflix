@@ -84,5 +84,7 @@ export default{
 <style lang="scss">
 @use './assets/scss/main.scss' as *;
 @use './assets/scss/utilities.scss' as *;
-
+body{
+	background-color: rgb(0, 0, 0);
+}
 </style>

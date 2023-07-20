@@ -1,8 +1,10 @@
 // utilities
-
+$margin-col: 10px;
 .row{
     display: flex;
     height: 100%;
+    // margin-left:  -($margin-col);
+    // margin-right:  -($margin-col);
 }
 .wrap{
     flex-wrap: wrap;
@@ -16,6 +18,9 @@
 }
 .space-between{
     justify-content: space-between;
+}
+.space-around{
+    justify-content: space-around;
 }
 .col-25{
     width: calc(100% / 5);
@@ -48,4 +53,7 @@
 }
 .display{
     display: block;
+}
+.text-center{
+    text-align: center;
 }

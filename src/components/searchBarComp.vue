@@ -12,18 +12,39 @@ export default{
 
 <template>
 <header>
-    <form action="" @submit.prevent="$emit('search')">
-      <input type="text" v-model="store.searchText">
-      <button type="submit">
-        search
-      </button>
-    </form>
+	<div class="row space-between align-center">
+		<h1 class="logo">
+			boolflix
+		</h1>
+		<div>
+			<input type="text" placeholder="search title"
+				v-model="store.searchText"
+				v-on:keyup.enter="$emit('search')">
+			<button @click="$emit('search')">
+				search
+			</button>
+		</div>
+	</div>
 </header>
 </template>
 
 <style lang="scss" scoped>
 @use '../assets/scss/debugger.scss' as *;
 header{
-  @include debug-large;
+	padding: 20px;
+	background-color: rgb(40, 40, 40);
+//   @include debug-large;
+  h1{
+	color: rgb(198, 2, 2);
+  }
+  input, button{
+	padding: 5px;
+  }
+  button{
+	border: none;
+	background-color: inherit;
+	color: white;
+	cursor: pointer;
+  }
 }
 </style>

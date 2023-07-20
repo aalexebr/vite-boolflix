@@ -15,13 +15,23 @@ export default{
 
 <template>
 <footer>
-    FOUND: {{ store.movieArray.length }}
+  <div class="row space-around">
+    <div>
+      movies found: {{ store.movieArray.length }}
+    </div>
+    <div>
+      series found: {{ store.seriesArray.length }}
+    </div>
+  </div>
+    
 </footer>
 </template>
 
 <style lang="scss" scoped>
 @use '../assets/scss/debugger.scss' as *;
 footer{
-  @include debug-large;
+  background-color: black;
+  color: grey;
+  padding: 10px;
 }
 </style>
