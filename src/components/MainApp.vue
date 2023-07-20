@@ -53,22 +53,20 @@ main{
   .col-25{
 	@include debug-one;
   }
-  ul,ol{
-    margin-left: 25px;
-	.poster{
-		display: inline-block;
-		width: 100px;
-		img{
-			width: 100%;
-		}
-	}
-	.lang{
-		width: 20px;
-		display: inline-block;
-		img{
-			width: 100%;
-		}
-	}
-  }
+	// .poster{
+	// 	display: inline-block;
+	// 	width: 100px;
+	// 	img{
+	// 		width: 100%;
+	// 	}
+	// }
+	// .lang{
+	// 	width: 20px;
+	// 	display: inline-block;
+	// 	img{
+	// 		width: 100%;
+	// 	}
+	// }
+  
 }
 </style>

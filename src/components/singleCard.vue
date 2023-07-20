@@ -90,9 +90,12 @@ export default{
 		&:hover .overlay{
 			display: block;
 			z-index: 1;
+			width: 100%;
+			height: 100%;
+			color: rgb(255, 255, 255);
 			top: 0;
-			left: 0;
-			color: white;
+			background-color: rgba(0, 0, 0, 0.336);
+			padding: 20px;
 		}
 	}
 .lang{
