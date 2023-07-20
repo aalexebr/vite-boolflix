@@ -21,12 +21,17 @@ export default{
       <li v-for="(element,i) in store.searchArray" :key="i">
 		{{ i }}
 		<div class="poster">
-			<img :src="`https://image.tmdb.org/t/p/w342/${element.poster_path}`" alt="">
+			<img v-if="element.poster_path != null"
+			:src="`https://image.tmdb.org/t/p/w342/${element.poster_path}`" alt="">
+			<img v-else
+			src="../assets/img/posternotfound.png" alt="">
 		</div>
         title:{{ element.title }}{{ element.name }}
         originaltitle:{{ element.original_title }}{{ element.original_name }}
         lang:{{ element.original_language}}
-        vote:{{ element.vote_average}}
+        vote: 
+		<span v-if="Math.round(element.vote_average / 2) == 0"> 1</span>
+		<span v-else>{{ Math.round(element.vote_average / 2)}}</span>
         <template v-for="(language,langIndex) in store.langArr" :key="langIndex">
 			<div class="lang"
 				v-if="element.original_language == store.langArr[langIndex].lang">
