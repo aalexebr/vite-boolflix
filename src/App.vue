@@ -31,8 +31,8 @@ export default{
 					})
 				.then(response=>{
 					console.log(response.data.results)
-					this.store.searchArray=response.data.results
-					console.log(this.store.searchArray)
+					this.store.movieArray=response.data.results
+					console.log(this.store.movieArray)
 					this.store.searchText=''
 				}
 			)
@@ -45,12 +45,13 @@ export default{
 					})
 				.then(response=>{
 					console.log('get',response.data.results)
+					this.store.seriesArray=response.data.results
 					let newArr =[]
 					newArr = response.data.results
 					for(let i=0; i<newArr.length; i++){
-						this.store.searchArray.push(newArr[i])
+						this.store.movieArray.push(newArr[i])
 					}
-					console.log('storeArr',this.store.searchArray)
+					console.log('storeArr',this.store.movieArray)
 					this.store.searchText=''
 				}
 			)

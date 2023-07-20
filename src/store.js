@@ -1,7 +1,8 @@
 import { reactive } from 'vue'
 export const store = reactive({
                         searchText :'',
-						searchArray :[],
+						movieArray :[],
+						seriesArray :[],
 						langArr:[
 							{
 								lang:'it',
@@ -9,11 +10,17 @@ export const store = reactive({
 							},
 							{
 								lang:'en',
-								img: 'uk.png'
+								img: 'en.png'
 							},
 							{
 								lang:'ja',
 								img: 'ja.png'
 							},
-						]
+						],
+						langAr:{
+							'it': 'it.png',
+							'en': 'en.png',
+							'ja': 'ja.png'
+						},
+						availableFlags:['en', 'it', 'ja']
                      });

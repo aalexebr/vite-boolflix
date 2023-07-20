@@ -15,7 +15,7 @@ export default{
 
 <template>
 <footer>
-    FOUND: {{ store.searchArray.length }}
+    FOUND: {{ store.movieArray.length }}
 </footer>
 </template>
 
