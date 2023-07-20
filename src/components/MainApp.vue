@@ -1,7 +1,12 @@
 <script>
+// single card
+import SingleCard from './singleCard.vue';
 // store
 import {store} from '../store'
 export default{
+	components:{
+		SingleCard
+	},
     data(){
       return{
         store
@@ -18,74 +23,36 @@ export default{
 
 <template>
 <main>
-    <ul>
-      <li v-for="(element,i) in store.movieArray" :key="i">
-		<!-- {{ i }} -->
-		<ol>
-			<li>
-				<div class="poster">
-					<img v-if="element.poster_path != null"
-					:src="`https://image.tmdb.org/t/p/w342/${element.poster_path}`" alt="">
-					<img v-else
-					src="../assets/img/posternotfound.png" alt="">
-					<!-- <img :src="`https://image.tmdb.org/t/p/w342/${element.poster_path}` ?? '../assets/img/posternotfound.png'" alt=""> -->
-				</div>
-			</li>
-			<li>
-				title:{{ element.title ?? element.name}}
-			</li>
-			<li>
-				originaltitle:{{ element.original_title ?? element.original_name}}
-			</li>
-			<li>
-				lang:{{ element.original_language}}
-			</li>
-			<li>
-				 vote: 
-					<template v-if="Math.round(element.vote_average / 2) == 0">
-						<i class="fa-solid fa-star"></i>
-						<i v-for="(e,j) in 4" :key="j" class="fa-regular fa-star"></i>
-					</template>
-
-					<template v-else>
-						<i v-for="(e,j) in Math.round(element.vote_average / 2)" :key="j"
-							class="fa-solid fa-star"></i>
-						<i v-for="(e,j) in (5 - Math.round(element.vote_average / 2))" :key="j"
-							class="fa-regular fa-star"></i>
-					</template>
-			</li>
-			<li>
-				<!-- <template v-if="store.availableFlags.includes(element.original_language)">
-					<template v-for="(language,langIndex) in store.langArr" :key="langIndex">
-						<div class="lang"
-							v-if="element.original_language == store.langArr[langIndex].lang">
-							<img :src="getImgPath(`../assets/img/${store.langArr[langIndex].img}`)" :alt="element.original_language">
-						</div>
-					</template>
-				</template>
-				<span v-else>
-					lang:{{ element.original_language}}
-				</span> -->
-				<div class="lang">
-					<img :src="getImgPath(`../assets/img/${store.langAr[element.original_language]}`)" :alt="element.original_language">
-				</div>
-			</li>
-		</ol>
-      </li>
-    </ul>
+	<template v-if="store.movieArray.length != 0">
+		<div class="row wrap">
+			<div class="col-25"
+				v-for="(element,i) in store.movieArray" :key="i">
+				<SingleCard :elementData = "element"/>
+			</div>
+		</div>
+	</template>
 	<template v-if="store.seriesArray.length != 0">
 		<h1>
 			series
 		</h1>
-		<!-- single card -->
+		<div class="row wrap">
+			<div class="col-25"
+				v-for="(element,i) in store.seriesArray" :key="i">
+				<SingleCard :elementData = "element"/>
+			</div>
+		</div>
 	</template>
 </main>
 </template>
 
 <style lang="scss" scoped>
 @use '../assets/scss/debugger.scss' as *;
+@use '../assets/scss/utilities.scss' as *;
 main{
   @include debug-large-two;
+  .col-25{
+	@include debug-one;
+  }
   ul,ol{
     margin-left: 25px;
 	.poster{

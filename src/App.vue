@@ -1,6 +1,6 @@
 <script>
 // store
-import {store} from './store'
+import {store} from './store';
 // axios
 import axios from 'axios';
 // API KEY a030de96d73a49e420c677a36c407e57
@@ -44,14 +44,14 @@ export default{
 						}
 					})
 				.then(response=>{
-					console.log('get',response.data.results)
+					// console.log('get',response.data.results)
 					this.store.seriesArray=response.data.results
-					let newArr =[]
-					newArr = response.data.results
-					for(let i=0; i<newArr.length; i++){
-						this.store.movieArray.push(newArr[i])
-					}
-					console.log('storeArr',this.store.movieArray)
+					// let newArr =[]
+					// newArr = response.data.results
+					// for(let i=0; i<newArr.length; i++){
+					// 	this.store.movieArray.push(newArr[i])
+					// }
+					// console.log('storeArr',this.store.movieArray)
 					this.store.searchText=''
 				}
 			)
@@ -72,12 +72,17 @@ export default{
 </script>
 
 <template>
-	<searchBarComponent
-	@search="searchMovies"/>
-	<MainApp/>
-  	<FooterApp/>
+	<div class="container">
+		<searchBarComponent
+			@search="searchMovies"/>
+		<MainApp/>
+		<FooterApp/>
+	</div>
+	
 </template>
 
 <style lang="scss">
 @use './assets/scss/main.scss' as *;
+@use './assets/scss/utilities.scss' as *;
+
 </style>
