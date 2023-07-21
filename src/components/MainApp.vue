@@ -11,7 +11,8 @@ export default{
 	},
     data(){
       return{
-        store
+        store,
+		flagButton:false
       }
     },
     methods:{
@@ -19,7 +20,7 @@ export default{
 			return new URL(imgPath, import.meta.url).href;
 		},
 		getMovieActorList(item){
-			axios.get(`https://api.themoviedb.org/3/movie/${item}/credits`,{
+			axios.get(`https://api.themoviedb.org/3/movie/${item.id}/credits`,{
 						params:{
 							api_key:'a030de96d73a49e420c677a36c407e57',
 							}
@@ -40,6 +41,27 @@ export default{
 					// console.log(this.store.actorList)
 				})
 				
+		},
+		getItemGenre(item){
+			this.store.currentItemGenre=[]
+			for(let i=0; i<this.store.genreListMovie.genres.length; i++){
+				if(item.genre_ids.includes(this.store.genreListMovie.genres[i].id)){
+					// console.log(this.store.genreListMovie.genres[i].name)
+					this.store.currentItemGenre.push(this.store.genreListMovie.genres[i].name)
+					console.log(this.store.currentItemGenre)
+				}
+			}
+		},
+		// hideInfo(){
+			
+		// 	this.flagButton = !this.flagButton
+		// },
+		getMoreInfo(item){
+			// this.getMovieActorList(item)
+			// this.getItemGenre(item)
+			console.log(item)
+			this.getMovieActorList(item)
+			this.getItemGenre(item)
 		}
 		
 	}
@@ -58,7 +80,8 @@ export default{
 			<div class="col-25"
 				v-for="(element,i) in store.movieArray" :key="i">
 				<SingleCard :elementData = "element"
-							@click="getMovieActorList(element.id)"/>
+							:buttonFlag="flagButton"
+							@moreInfo="getMoreInfo(element)"/>
 			</div>
 		</div>
 	</template>
@@ -71,8 +94,7 @@ export default{
 		<div class="row wrap">
 			<div class="col-25"
 				v-for="(element,i) in store.seriesArray" :key="i">
-				<SingleCard :elementData = "element"
-							@mouseover="getMovieActorList(element.id)"/>
+				<SingleCard :elementData = "element"/>
 			</div>
 		</div>
 	</template>

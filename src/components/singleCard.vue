@@ -17,7 +17,11 @@ export default{
       elementData:{
         type: Object,
         default: null
-      }
+      },
+	  buttonFlag: {
+        type: Boolean,
+        default: false
+      },
     },
 	methods:{
 		getImgPath: function(imgPath){
@@ -32,26 +36,26 @@ export default{
 				this.n=1
 			}
 		},
-		getMovieActorList(item){
-			axios.get(`https://api.themoviedb.org/3/movie/${item}/credits`,{
-						params:{
-							api_key:'a030de96d73a49e420c677a36c407e57',
-							}
-						})
-				.then(response=>{
-					this.actorList =[]
-					if(response.data.cast.length >=5){
-						for(let i=0; i<5 ; i++){
-						this.actorList.push(response.data.cast[i].name)
-						}
-					}
-					else{
-						for(let i=0; i<response.data.cast.length ; i++){
-						this.actorList.push(response.data.cast[i].name)
-						}
-					}
-				})
-		},
+		// getMovieActorList(item){
+		// 	axios.get(`https://api.themoviedb.org/3/movie/${item}/credits`,{
+		// 				params:{
+		// 					api_key:'a030de96d73a49e420c677a36c407e57',
+		// 					}
+		// 				})
+		// 		.then(response=>{
+		// 			this.actorList =[]
+		// 			if(response.data.cast.length >=5){
+		// 				for(let i=0; i<5 ; i++){
+		// 				this.actorList.push(response.data.cast[i].name)
+		// 				}
+		// 			}
+		// 			else{
+		// 				for(let i=0; i<response.data.cast.length ; i++){
+		// 				this.actorList.push(response.data.cast[i].name)
+		// 				}
+		// 			}
+		// 		})
+		// },
 		getItemGenre(item){
 			this.store.currentItemGenre=[]
 			for(let i=0; i<this.store.genreListMovie.genres.length; i++){
@@ -81,7 +85,7 @@ export default{
 		<img v-else
 		src="../assets/img/posternotfound.png" alt="">
 		<!-- <img :src="`https://image.tmdb.org/t/p/w342/${elementData.poster_path}` ?? '../assets/img/posternotfound.png'" alt=""> -->
-		<div class="overlay pos-absolute d-none">
+		<div class="overlay pos-absolute d-none" @mouseleave="flag=false">
 			<ul :class="{'d-none':flag}">	
 				<li>
 					<!-- title: -->
@@ -127,17 +131,24 @@ export default{
 						<img :src="getImgPath(`../assets/img/${store.langAr[elementData.original_language]}`)" :alt="elementData.original_language">
 					</div>
 				</li>
+				{{ buttonFlag }}
 			</ul>
 			<ul class="d-none" :class="{'display': flag}">
+				<h5>
+					actors:
+				</h5>
 				<li v-for="(actor,i) in store.actorList">
 					{{ store.actorList[i] }}
 				</li>
+				<h5>
+					genres:
+				</h5>
 				<li v-for="(genre,i) in store.currentItemGenre">
 					{{genre}}
 				</li>
 			</ul>
-			<button @click="hideInfo();getItemGenre(elementData)">
-				{{buttonText[n]}} actors
+			<button @click="$emit('moreInfo');hideInfo()">
+				{{buttonText[n]}} more info
 			</button>
 			
 		</div>
