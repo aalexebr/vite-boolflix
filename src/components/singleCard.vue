@@ -32,42 +32,11 @@ export default{
 				this.n=1
 			}
 		},
-		// getMovieActorList(item){
-		// 	axios.get(`https://api.themoviedb.org/3/movie/${item}/credits`,{
-		// 				params:{
-		// 					api_key:'a030de96d73a49e420c677a36c407e57',
-		// 					}
-		// 				})
-		// 		.then(response=>{
-		// 			this.actorList =[]
-		// 			if(response.data.cast.length >=5){
-		// 				for(let i=0; i<5 ; i++){
-		// 				this.actorList.push(response.data.cast[i].name)
-		// 				}
-		// 			}
-		// 			else{
-		// 				for(let i=0; i<response.data.cast.length ; i++){
-		// 				this.actorList.push(response.data.cast[i].name)
-		// 				}
-		// 			}
-		// 		})
-		// },
-		// getItemGenre(item){
-		// 	this.store.currentItemGenre=[]
-		// 	for(let i=0; i<this.store.genreListMovie.genres.length; i++){
-		// 		if(item.genre_ids.includes(this.store.genreListMovie.genres[i].id)){
-		// 			// console.log(this.store.genreListMovie.genres[i].name)
-		// 			this.store.currentItemGenre.push(this.store.genreListMovie.genres[i].name)
-		// 			console.log(this.store.currentItemGenre)
-		// 		}
-		// 	}
-		// },
 		resetCard(){
 			this.flag=false
 			this.store.actorList=[]
 			this.store.currentItemGenre=[]
-		}
-		
+		}	
 	},
 	computed:{
 		vote(){

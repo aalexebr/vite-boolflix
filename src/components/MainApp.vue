@@ -26,7 +26,6 @@ export default{
 						})
 				.then(response=>{
 					this.store.actorList =[]
-					// console.log(response.data.cast)
 					if(response.data.cast.length >=5){
 						for(let i=0; i<5 ; i++){
 						this.store.actorList.push(response.data.cast[i].name)
@@ -37,9 +36,27 @@ export default{
 						this.store.actorList.push(response.data.cast[i].name)
 						}
 					}
-					// console.log(this.store.actorList)
-				})
-				
+				})	
+		},
+		getSeriesActorList(item){
+			axios.get(`https://api.themoviedb.org/3/tv/${item.id}/credits`,{
+						params:{
+							api_key:'a030de96d73a49e420c677a36c407e57',
+							}
+						})
+				.then(response=>{
+					this.store.actorList =[]
+					if(response.data.cast.length >=5){
+						for(let i=0; i<5 ; i++){
+						this.store.actorList.push(response.data.cast[i].name)
+						}
+					}
+					else{
+						for(let i=0; i<response.data.cast.length ; i++){
+						this.store.actorList.push(response.data.cast[i].name)
+						}
+					}
+				})	
 		},
 		getMovieGenre(item){
 			this.store.currentItemGenre=[]
@@ -72,7 +89,7 @@ export default{
 			// this.getMovieActorList(item)
 			// this.getItemGenre(item)
 			console.log(item)
-			this.getMovieActorList(item)
+			this.getSeriesActorList(item)
 			this.getSeriesGenre(item)
 		}
 		
