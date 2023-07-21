@@ -12,7 +12,6 @@ export default{
     data(){
       return{
         store,
-		flagButton:false
       }
     },
     methods:{
@@ -42,7 +41,7 @@ export default{
 				})
 				
 		},
-		getItemGenre(item){
+		getMovieGenre(item){
 			this.store.currentItemGenre=[]
 			for(let i=0; i<this.store.genreListMovie.genres.length; i++){
 				if(item.genre_ids.includes(this.store.genreListMovie.genres[i].id)){
@@ -52,16 +51,29 @@ export default{
 				}
 			}
 		},
-		// hideInfo(){
-			
-		// 	this.flagButton = !this.flagButton
-		// },
-		getMoreInfo(item){
+		getSeriesGenre(item){
+			this.store.currentItemGenre=[]
+			for(let i=0; i<this.store.genreListSeries.genres.length; i++){
+				if(item.genre_ids.includes(this.store.genreListSeries.genres[i].id)){
+					// console.log(this.store.genreListSeries.genres[i].name)
+					this.store.currentItemGenre.push(this.store.genreListSeries.genres[i].name)
+					console.log(this.store.currentItemGenre)
+				}
+			}
+		},
+		getMovieInfo(item){
 			// this.getMovieActorList(item)
 			// this.getItemGenre(item)
 			console.log(item)
 			this.getMovieActorList(item)
-			this.getItemGenre(item)
+			this.getMovieGenre(item)
+		},
+		getSeriesInfo(item){
+			// this.getMovieActorList(item)
+			// this.getItemGenre(item)
+			console.log(item)
+			this.getMovieActorList(item)
+			this.getSeriesGenre(item)
 		}
 		
 	}
@@ -80,8 +92,7 @@ export default{
 			<div class="col-25"
 				v-for="(element,i) in store.movieArray" :key="i">
 				<SingleCard :elementData = "element"
-							:buttonFlag="flagButton"
-							@moreInfo="getMoreInfo(element)"/>
+							@moreInfo="getMovieInfo(element)"/>
 			</div>
 		</div>
 	</template>
@@ -94,7 +105,8 @@ export default{
 		<div class="row wrap">
 			<div class="col-25"
 				v-for="(element,i) in store.seriesArray" :key="i">
-				<SingleCard :elementData = "element"/>
+				<SingleCard :elementData = "element"
+							@moreInfo="getSeriesInfo(element)"/>
 			</div>
 		</div>
 	</template>

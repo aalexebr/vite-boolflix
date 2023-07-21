@@ -18,10 +18,6 @@ export default{
         type: Object,
         default: null
       },
-	  buttonFlag: {
-        type: Boolean,
-        default: false
-      },
     },
 	methods:{
 		getImgPath: function(imgPath){
@@ -56,16 +52,21 @@ export default{
 		// 			}
 		// 		})
 		// },
-		getItemGenre(item){
+		// getItemGenre(item){
+		// 	this.store.currentItemGenre=[]
+		// 	for(let i=0; i<this.store.genreListMovie.genres.length; i++){
+		// 		if(item.genre_ids.includes(this.store.genreListMovie.genres[i].id)){
+		// 			// console.log(this.store.genreListMovie.genres[i].name)
+		// 			this.store.currentItemGenre.push(this.store.genreListMovie.genres[i].name)
+		// 			console.log(this.store.currentItemGenre)
+		// 		}
+		// 	}
+		// },
+		resetCard(){
+			this.flag=false
+			this.store.actorList=[]
 			this.store.currentItemGenre=[]
-			for(let i=0; i<this.store.genreListMovie.genres.length; i++){
-				if(item.genre_ids.includes(this.store.genreListMovie.genres[i].id)){
-					// console.log(this.store.genreListMovie.genres[i].name)
-					this.store.currentItemGenre.push(this.store.genreListMovie.genres[i].name)
-					console.log(this.store.currentItemGenre)
-				}
-			}
-		},
+		}
 		
 	},
 	computed:{
@@ -85,7 +86,7 @@ export default{
 		<img v-else
 		src="../assets/img/posternotfound.png" alt="">
 		<!-- <img :src="`https://image.tmdb.org/t/p/w342/${elementData.poster_path}` ?? '../assets/img/posternotfound.png'" alt=""> -->
-		<div class="overlay pos-absolute d-none" @mouseleave="flag=false">
+		<div class="overlay pos-absolute d-none" @mouseleave="resetCard">
 			<ul :class="{'d-none':flag}">	
 				<li>
 					<!-- title: -->
@@ -131,7 +132,6 @@ export default{
 						<img :src="getImgPath(`../assets/img/${store.langAr[elementData.original_language]}`)" :alt="elementData.original_language">
 					</div>
 				</li>
-				{{ buttonFlag }}
 			</ul>
 			<ul class="d-none" :class="{'display': flag}">
 				<h5>
