@@ -18,6 +18,12 @@ export default{
 			return new URL(imgPath, import.meta.url).href;
 		},
 		
+		
+	},
+	computed:{
+		voteFunctionForAlessio(){
+			return Math.round(this.elementData.vote_average / 2)
+		}
 	}
 }
 </script>
@@ -33,30 +39,30 @@ export default{
 		<div class="overlay pos-absolute d-none">
 			<ol>	
 			<li>
-				title:
+				<!-- title: -->
 				<h3>
 					{{ elementData.title ?? elementData.name}}
 				</h3>
 			</li>
 			<li>
-				originaltitle:
-				<h4>
+				<!-- originaltitle: -->
+				<h5>
 					{{ elementData.original_title ?? elementData.original_name}}
-				</h4>
+				</h5>
 			</li>
 			<!-- <li>
 				lang:{{ elementData.original_language}}
 			</li> -->
 			<li>
-				<template v-if="Math.round(elementData.vote_average / 2) == 0">
+				<template v-if="voteFunctionForAlessio == 0">
 					<i class="fa-solid fa-star"></i>
 					<i v-for="(e,j) in 4" :key="j" class="fa-regular fa-star"></i>
 				</template>
 
 				<template v-else>
-					<i v-for="(e,j) in Math.round(elementData.vote_average / 2)" :key="j"
+					<i v-for="(e,j) in voteFunctionForAlessio" :key="j"
 						class="fa-solid fa-star"></i>
-					<i v-for="(e,j) in (5 - Math.round(elementData.vote_average / 2))" :key="j"
+					<i v-for="(e,j) in (5 - voteFunctionForAlessio)" :key="j"
 						class="fa-regular fa-star"></i>
 				</template>
 			</li>
