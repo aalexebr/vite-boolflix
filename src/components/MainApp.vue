@@ -3,6 +3,8 @@
 import SingleCard from './singleCard.vue';
 // store
 import {store} from '../store'
+// axios
+import axios from 'axios';
 export default{
 	components:{
 		SingleCard
@@ -16,6 +18,16 @@ export default{
 		getImgPath: function(imgPath){
 			return new URL(imgPath, import.meta.url).href;
 		},
+		getMovieActorList(movie){
+			axios.get(`https://api.themoviedb.org/3/movie/${movie}/credits`,{
+						params:{
+							api_key:'a030de96d73a49e420c677a36c407e57',
+							}
+						})
+				.then(response=>{
+					console.log(response.data)
+				})
+		}
 		
 	}
 }
@@ -32,7 +44,8 @@ export default{
 		<div class="row wrap">
 			<div class="col-25"
 				v-for="(element,i) in store.movieArray" :key="i">
-				<SingleCard :elementData = "element"/>
+				<SingleCard :elementData = "element"
+							@click="getMovieActorList(element.id)"/>
 			</div>
 		</div>
 	</template>

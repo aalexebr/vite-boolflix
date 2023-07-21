@@ -16,6 +16,10 @@ export default{
 		<h1 class="logo">
 			boolflix
 		</h1>
+		<span>
+			searching:   
+			{{store.searchedItem }}
+		</span>
 		<div>
 			<input type="text" placeholder="search title"
 				v-model="store.searchText"
@@ -45,6 +49,9 @@ header{
 	background-color: inherit;
 	color: white;
 	cursor: pointer;
+  }
+  span{
+	color: rgb(215, 215, 215);
   }
 }
 </style>

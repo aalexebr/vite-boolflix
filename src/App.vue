@@ -30,10 +30,10 @@ export default{
 						}
 					})
 				.then(response=>{
-					console.log(response.data.results)
 					this.store.movieArray=response.data.results
-					console.log(this.store.movieArray)
+					this.store.searchedItem = this.store.searchText
 					this.store.searchText=''
+					console.log(response.data.results)
 				}
 			)
 			// series
@@ -43,15 +43,9 @@ export default{
 						query: this.store.searchText
 						}
 					})
-				.then(response=>{
-					// console.log('get',response.data.results)
+				.then(response=>{	
 					this.store.seriesArray=response.data.results
-					// let newArr =[]
-					// newArr = response.data.results
-					// for(let i=0; i<newArr.length; i++){
-					// 	this.store.movieArray.push(newArr[i])
-					// }
-					// console.log('storeArr',this.store.movieArray)
+					console.log(store.searchedItem)
 					this.store.searchText=''
 				}
 			)
@@ -59,6 +53,16 @@ export default{
 		},
 		getImgPath: function(imgPath){
 			return new URL(imgPath, import.meta.url).href;
+		},
+		getMovieActorList(movie){
+			axios.get(`https://api.themoviedb.org/3/movie/${movie}/credits`,{
+				params:{
+					api_key:'a030de96d73a49e420c677a36c407e57',
+				}
+			})
+				.then(response=>{
+					console.log(response.data)
+				})
 		}
 	},
 	created(){
