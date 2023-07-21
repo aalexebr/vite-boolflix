@@ -47,26 +47,47 @@ export default{
 					this.store.seriesArray=response.data.results
 					console.log(this.store.seriesArray)
 					this.store.searchText=''
-				}
-			)
-
-		},
+				})
+			},
 		getImgPath: function(imgPath){
 			return new URL(imgPath, import.meta.url).href;
-		},
+			},
 		getMovieActorList(movie){
 			axios.get(`https://api.themoviedb.org/3/movie/${movie}/credits`,{
-				params:{
-					api_key:'a030de96d73a49e420c677a36c407e57',
-				}
-			})
+					params:{
+						api_key:'a030de96d73a49e420c677a36c407e57',
+					}
+				})
 				.then(response=>{
 					console.log(response.data)
 				})
+			},
+		getGenres(){
+			axios.get('https://api.themoviedb.org/3/genre/movie/list',{
+						params:{
+							api_key:'a030de96d73a49e420c677a36c407e57',
+							}
+					})
+				.then(response=>{
+					console.log(response.data)
+					this.store.genreListMovie = response.data
+				});
+			axios.get('https://api.themoviedb.org/3/genre/tv/list',{
+						params:{
+							api_key:'a030de96d73a49e420c677a36c407e57',
+						}
+					})
+				.then(response=>{
+					console.log(response.data)
+					this.store.genreListSeries = response.data
+					console.log(this.store.genreListSeries)
+					console.log(this.store.genreListMovie)
+				});
 		}
 	},
 	created(){
 		// this.searchMovies()
+		this.getGenres();
 	},
 	mounted(){
 

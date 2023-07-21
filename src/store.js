@@ -24,5 +24,7 @@ export const store = reactive({
 							'ja': 'ja.png'
 						},
 						// availableFlags:['en', 'it', 'ja'],
-						actorList:[]
+						actorList:[],
+						genreListMovie:[],
+						genreListSeries:[],
                      });

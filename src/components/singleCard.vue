@@ -1,12 +1,16 @@
 <script>
 // store
-import {store} from '../store'
+import {store} from '../store';
+// axios
+import axios from 'axios';
 export default{
     data(){
       return{
 		store,
 		flag: false,
-		buttonText:['hide','show']
+		buttonText:['hide','show'],
+		n:1,
+		actorList:[]
 	  }
     },
     props:{
@@ -21,6 +25,34 @@ export default{
 		},
 		hideInfo(){
 			this.flag = !this.flag
+			if(this.n==1){
+				this.n=0
+			}
+			else{
+				this.n=1
+			}
+		},
+		getMovieActorList(item){
+			axios.get(`https://api.themoviedb.org/3/movie/${item}/credits`,{
+						params:{
+							api_key:'a030de96d73a49e420c677a36c407e57',
+							}
+						})
+				.then(response=>{
+					this.actorList =[]
+					// console.log(response.data.cast)
+					if(response.data.cast.length >=5){
+						for(let i=0; i<5 ; i++){
+						this.actorList.push(response.data.cast[i].name)
+						}
+					}
+					else{
+						for(let i=0; i<response.data.cast.length ; i++){
+						this.actorList.push(response.data.cast[i].name)
+						}
+					}
+					// console.log(this.store.actorList)
+				})
 		}
 		
 	},
@@ -88,7 +120,7 @@ export default{
 				</li>
 			</ul>
 			<button @click="hideInfo()">
-				show actors
+				{{buttonText[n]}} actors
 			</button>
 			<ul class="d-none" :class="{'display': flag}">
 				<li v-for="(actor,i) in store.actorList">

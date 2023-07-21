@@ -26,7 +26,7 @@ export default{
 						})
 				.then(response=>{
 					this.store.actorList =[]
-					console.log(response.data.cast)
+					// console.log(response.data.cast)
 					if(response.data.cast.length >=5){
 						for(let i=0; i<5 ; i++){
 						this.store.actorList.push(response.data.cast[i].name)
@@ -37,8 +37,9 @@ export default{
 						this.store.actorList.push(response.data.cast[i].name)
 						}
 					}
-					console.log(this.store.actorList)
+					// console.log(this.store.actorList)
 				})
+				console.log('hover')
 		}
 		
 	}
@@ -71,7 +72,7 @@ export default{
 			<div class="col-25"
 				v-for="(element,i) in store.seriesArray" :key="i">
 				<SingleCard :elementData = "element"
-							@click="getMovieActorList(element.id)"/>
+							@mouseover="getMovieActorList(element.id)"/>
 			</div>
 		</div>
 	</template>
