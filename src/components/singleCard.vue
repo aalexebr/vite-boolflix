@@ -4,7 +4,9 @@ import {store} from '../store'
 export default{
     data(){
       return{
-		store
+		store,
+		flag: false,
+		buttonText:['hide','show']
 	  }
     },
     props:{
@@ -17,7 +19,9 @@ export default{
 		getImgPath: function(imgPath){
 			return new URL(imgPath, import.meta.url).href;
 		},
-		
+		hideInfo(){
+			this.flag = !this.flag
+		}
 		
 	},
 	computed:{
@@ -37,52 +41,60 @@ export default{
 		src="../assets/img/posternotfound.png" alt="">
 		<!-- <img :src="`https://image.tmdb.org/t/p/w342/${elementData.poster_path}` ?? '../assets/img/posternotfound.png'" alt=""> -->
 		<div class="overlay pos-absolute d-none">
-			<ol>	
-			<li>
-				<!-- title: -->
-				<h3>
-					{{ elementData.title ?? elementData.name}}
-				</h3>
-			</li>
-			<li>
-				<!-- originaltitle: -->
-				<h5>
-					{{ elementData.original_title ?? elementData.original_name}}
-				</h5>
-			</li>
-			<!-- <li>
-				lang:{{ elementData.original_language}}
-			</li> -->
-			<li>
-				<template v-if="voteFunctionForAlessio == 0">
-					<i class="fa-solid fa-star"></i>
-					<i v-for="(e,j) in 4" :key="j" class="fa-regular fa-star"></i>
-				</template>
-
-				<template v-else>
-					<i v-for="(e,j) in voteFunctionForAlessio" :key="j"
-						class="fa-solid fa-star"></i>
-					<i v-for="(e,j) in (5 - voteFunctionForAlessio)" :key="j"
-						class="fa-regular fa-star"></i>
-				</template>
-			</li>
-			<li>
-				<!-- <template v-if="store.availableFlags.includes(elementData.original_language)">
-					<template v-for="(language,langIndex) in store.langArr" :key="langIndex">
-						<div class="lang"
-							v-if="elementData.original_language == store.langArr[langIndex].lang">
-							<img :src="getImgPath(`../assets/img/${store.langArr[langIndex].img}`)" :alt="elementData.original_language">
-						</div>
-					</template>
-				</template>
-				<span v-else>
+			<ul :class="{'d-none':flag}">	
+				<li>
+					<!-- title: -->
+					<h3>
+						{{ elementData.title ?? elementData.name}}
+					</h3>
+				</li>
+				<li>
+					<!-- originaltitle: -->
+					<h5>
+						{{ elementData.original_title ?? elementData.original_name}}
+					</h5>
+				</li>
+				<!-- <li>
 					lang:{{ elementData.original_language}}
-				</span> -->
-				<div class="lang">
-					<img :src="getImgPath(`../assets/img/${store.langAr[elementData.original_language]}`)" :alt="elementData.original_language">
-				</div>
-			</li>
-			</ol>
+				</li> -->
+				<li>
+					<template v-if="voteFunctionForAlessio == 0">
+						<i class="fa-solid fa-star"></i>
+						<i v-for="(e,j) in 4" :key="j" class="fa-regular fa-star"></i>
+					</template>
+
+					<template v-else>
+						<i v-for="(e,j) in voteFunctionForAlessio" :key="j"
+							class="fa-solid fa-star"></i>
+						<i v-for="(e,j) in (5 - voteFunctionForAlessio)" :key="j"
+							class="fa-regular fa-star"></i>
+					</template>
+				</li>
+				<li>
+					<!-- <template v-if="store.availableFlags.includes(elementData.original_language)">
+						<template v-for="(language,langIndex) in store.langArr" :key="langIndex">
+							<div class="lang"
+								v-if="elementData.original_language == store.langArr[langIndex].lang">
+								<img :src="getImgPath(`../assets/img/${store.langArr[langIndex].img}`)" :alt="elementData.original_language">
+							</div>
+						</template>
+					</template>
+					<span v-else>
+						lang:{{ elementData.original_language}}
+					</span> -->
+					<div class="lang">
+						<img :src="getImgPath(`../assets/img/${store.langAr[elementData.original_language]}`)" :alt="elementData.original_language">
+					</div>
+				</li>
+			</ul>
+			<button @click="hideInfo()">
+				show actors
+			</button>
+			<ul class="d-none" :class="{'display': flag}">
+				<li v-for="(actor,i) in store.actorList">
+					{{ store.actorList[i] }}
+				</li>
+			</ul>
 		</div>
 	</div>
 	

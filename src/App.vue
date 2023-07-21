@@ -33,7 +33,7 @@ export default{
 					this.store.movieArray=response.data.results
 					this.store.searchedItem = this.store.searchText
 					this.store.searchText=''
-					console.log(response.data.results)
+					// console.log(response.data.results)
 				}
 			)
 			// series
@@ -45,7 +45,7 @@ export default{
 					})
 				.then(response=>{	
 					this.store.seriesArray=response.data.results
-					console.log(store.searchedItem)
+					console.log(this.store.seriesArray)
 					this.store.searchText=''
 				}
 			)

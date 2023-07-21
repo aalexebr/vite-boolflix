@@ -18,14 +18,26 @@ export default{
 		getImgPath: function(imgPath){
 			return new URL(imgPath, import.meta.url).href;
 		},
-		getMovieActorList(movie){
-			axios.get(`https://api.themoviedb.org/3/movie/${movie}/credits`,{
+		getMovieActorList(item){
+			axios.get(`https://api.themoviedb.org/3/movie/${item}/credits`,{
 						params:{
 							api_key:'a030de96d73a49e420c677a36c407e57',
 							}
 						})
 				.then(response=>{
-					console.log(response.data)
+					this.store.actorList =[]
+					console.log(response.data.cast)
+					if(response.data.cast.length >=5){
+						for(let i=0; i<5 ; i++){
+						this.store.actorList.push(response.data.cast[i].name)
+						}
+					}
+					else{
+						for(let i=0; i<response.data.cast.length ; i++){
+						this.store.actorList.push(response.data.cast[i].name)
+						}
+					}
+					console.log(this.store.actorList)
 				})
 		}
 		
@@ -58,7 +70,8 @@ export default{
 		<div class="row wrap">
 			<div class="col-25"
 				v-for="(element,i) in store.seriesArray" :key="i">
-				<SingleCard :elementData = "element"/>
+				<SingleCard :elementData = "element"
+							@click="getMovieActorList(element.id)"/>
 			</div>
 		</div>
 	</template>
