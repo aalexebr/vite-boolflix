@@ -45,7 +45,7 @@ export default{
 					})
 				.then(response=>{	
 					this.store.seriesArray=response.data.results
-					console.log(this.store.seriesArray)
+					console.log(this.store.movieArray)
 					this.store.searchText=''
 				})
 			},
@@ -69,7 +69,7 @@ export default{
 							}
 					})
 				.then(response=>{
-					console.log(response.data)
+					// console.log(response.data)
 					this.store.genreListMovie = response.data
 				});
 			axios.get('https://api.themoviedb.org/3/genre/tv/list',{
@@ -78,9 +78,9 @@ export default{
 						}
 					})
 				.then(response=>{
-					console.log(response.data)
+					// console.log(response.data)
 					this.store.genreListSeries = response.data
-					console.log(this.store.genreListSeries)
+					// console.log(this.store.genreListSeries)
 					console.log(this.store.genreListMovie)
 				});
 		}

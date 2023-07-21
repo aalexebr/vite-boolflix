@@ -39,7 +39,7 @@ export default{
 					}
 					// console.log(this.store.actorList)
 				})
-				console.log('hover')
+				
 		}
 		
 	}

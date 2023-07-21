@@ -40,7 +40,6 @@ export default{
 						})
 				.then(response=>{
 					this.actorList =[]
-					// console.log(response.data.cast)
 					if(response.data.cast.length >=5){
 						for(let i=0; i<5 ; i++){
 						this.actorList.push(response.data.cast[i].name)
@@ -51,15 +50,25 @@ export default{
 						this.actorList.push(response.data.cast[i].name)
 						}
 					}
-					// console.log(this.store.actorList)
 				})
-		}
+		},
+		getItemGenre(item){
+			this.store.currentItemGenre=[]
+			for(let i=0; i<this.store.genreListMovie.genres.length; i++){
+				if(item.genre_ids.includes(this.store.genreListMovie.genres[i].id)){
+					// console.log(this.store.genreListMovie.genres[i].name)
+					this.store.currentItemGenre.push(this.store.genreListMovie.genres[i].name)
+					console.log(this.store.currentItemGenre)
+				}
+			}
+		},
 		
 	},
 	computed:{
-		voteFunctionForAlessio(){
+		vote(){
 			return Math.round(this.elementData.vote_average / 2)
-		}
+		},
+		
 	}
 }
 </script>
@@ -90,15 +99,15 @@ export default{
 					lang:{{ elementData.original_language}}
 				</li> -->
 				<li>
-					<template v-if="voteFunctionForAlessio == 0">
+					<template v-if="vote == 0">
 						<i class="fa-solid fa-star"></i>
 						<i v-for="(e,j) in 4" :key="j" class="fa-regular fa-star"></i>
 					</template>
 
 					<template v-else>
-						<i v-for="(e,j) in voteFunctionForAlessio" :key="j"
+						<i v-for="(e,j) in vote" :key="j"
 							class="fa-solid fa-star"></i>
-						<i v-for="(e,j) in (5 - voteFunctionForAlessio)" :key="j"
+						<i v-for="(e,j) in (5 - vote)" :key="j"
 							class="fa-regular fa-star"></i>
 					</template>
 				</li>
@@ -119,14 +128,18 @@ export default{
 					</div>
 				</li>
 			</ul>
-			<button @click="hideInfo()">
-				{{buttonText[n]}} actors
-			</button>
 			<ul class="d-none" :class="{'display': flag}">
 				<li v-for="(actor,i) in store.actorList">
 					{{ store.actorList[i] }}
 				</li>
+				<li v-for="(genre,i) in store.currentItemGenre">
+					{{genre}}
+				</li>
 			</ul>
+			<button @click="hideInfo();getItemGenre(elementData)">
+				{{buttonText[n]}} actors
+			</button>
+			
 		</div>
 	</div>
 	
